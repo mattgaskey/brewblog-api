@@ -1,3 +1,9 @@
+"""
+This module defines the routes for the Brewery API.
+It includes endpoints to get a list of breweries, create a new brewery,
+show a specific brewery, and edit an existing brewery.
+"""
+
 from flask import request, jsonify
 import sqlalchemy as sa
 from brewblog import db
@@ -10,7 +16,16 @@ register_error_handlers(bp)
 
 @bp.route('/api/breweries')
 @requires_auth('get:breweries')
-def breweries(payload):
+def get_breweries(payload):
+    """
+    Endpoint to get a list of breweries.
+
+    Args:
+        payload (dict): The JWT payload containing user information.
+
+    Returns:
+        Response: The JSON response with a list of breweries grouped by city and state.
+    """
     breweries = db.session.scalars(sa.select(Brewery)).all()
 
     areas = {}
@@ -20,13 +35,26 @@ def breweries(payload):
             areas[area] = []
         areas[area].append(brewery)
 
-    areas_list = [{'city': city, 'state': state, 'breweries': [brewery.serialize() for brewery in breweries]} for (city, state), breweries in areas.items()]
+    areas_list = [
+      {'city': city,
+       'state': state, 
+       'breweries': [brewery.serialize() for brewery in breweries]
+      } for (city, state), breweries in areas.items()]
 
     return jsonify(areas_list)
 
 @bp.route('/api/breweries/create', methods=['POST'])
 @requires_auth('create:breweries')
 def create_brewery(payload):
+    """
+    Endpoint to create a new brewery.
+
+    Args:
+        payload (dict): The JWT payload containing user information.
+
+    Returns:
+        Response: The JSON response with the created brewery details or an error message.
+    """
     data = request.json
 
     if not data:
@@ -66,6 +94,16 @@ def create_brewery(payload):
 @bp.route('/api/breweries/<string:brewery_id>')
 @requires_auth('get:breweries')
 def show_brewery(brewery_id, payload):
+    """
+    Endpoint to show details of a specific brewery.
+
+    Args:
+        brewery_id (str): The ID of the brewery to be shown.
+        payload (dict): The JWT payload containing user information.
+
+    Returns:
+        Response: The JSON response with the brewery details or an error message.
+    """
     brewery = db.session.scalar(sa.select(Brewery).where(Brewery.id == brewery_id))
     if brewery is None:
         return jsonify({'error': f'Brewery with id {brewery_id} not found.'}), 404
@@ -77,6 +115,16 @@ def show_brewery(brewery_id, payload):
 @bp.route('/api/breweries/<string:brewery_id>/edit', methods=['POST', 'PATCH'])
 @requires_auth('edit:breweries')
 def edit_brewery(brewery_id, payload):
+    """
+    Endpoint to edit an existing brewery.
+
+    Args:
+        brewery_id (str): The ID of the brewery to be edited.
+        payload (dict): The JWT payload containing user information.
+
+    Returns:
+        Response: The JSON response with the updated brewery details or an error message.
+    """
     brewery = db.session.scalar(sa.select(Brewery).where(Brewery.id == brewery_id))
     if brewery is None:
         return jsonify({'error': f'Brewery with id {brewery_id} not found.'}), 404
