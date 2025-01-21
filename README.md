@@ -4,6 +4,16 @@ BrewBlog is a Flask-based web application designed to manage and showcase brewer
 
 The API can be accessed live at [https://brewblog-api.onrender.com/](https://brewblog-api.onrender.com/). A React frontend is also configured, and is live at [https://brewblog-react.onrender.com/](https://brewblog-react.onrender.com/). The React project can be found at [https://github.com/mattgaskey/brewblog-react](https://github.com/mattgaskey/brewblog-react).
 
+- [Features](#features)
+- [Installation](#installation)
+- [Auth0](#auth0)
+  - [Drinker](#drinker)
+  - [Brewer](#brewer)
+- [API Endpoints](#api-endpoints)
+  - [Breweries](#breweries)
+  - [Beers](#beers)
+  - [Styles](#styles)
+
 ## Features
 
 - **Brewery Management**: Create, retrieve, and update breweries.
