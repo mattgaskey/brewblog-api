@@ -1,0 +1,345 @@
+{
+	"info": {
+		"_postman_id": "4b6ff907-3ee1-44a5-9c99-af5609aa2f43",
+		"name": "BrewBlog API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "38259626"
+	},
+	"item": [
+		{
+			"name": "Public",
+			"item": [
+				{
+					"name": "Styles",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/styles",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"styles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Breweries (Fail)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/breweries",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"breweries"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Drinker",
+			"item": [
+				{
+					"name": "Get Breweries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/breweries",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"breweries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Brewery",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/breweries/64f90c02-c3f8-4dec-a7c1-ea176b161d88",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"breweries",
+								"64f90c02-c3f8-4dec-a7c1-ea176b161d88"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Beer to Brewery",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"999\",\n    \"name\": \"Cool New Beer\",\n    \"description\": \"A cool new beer with a cool flavor profile.\",\n    \"style\": \"1\",\n    \"brewery_id\": \"64f90c02-c3f8-4dec-a7c1-ea176b161d88\"        \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/beers/create",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"beers",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Brewery",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id\": \"6e35969e-ccfc-4f69-b738-0748b0d3a591\",\n    \"name\": \"Crisis Brewing\",\n    \"address\": \"210 S Archibald Yell Blvd\",\n    \"city\": \"Fayetteville\",\n    \"state\": \"Arkansas\",\n    \"phone\": \"4795822337\",\n    \"website_link\": \"http://www.crisisbrew.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/breweries/create",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"breweries",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Beer (Fail)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/beers/999/delete",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"beers",
+								"999",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Brewery (Fail)",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Oceanside Brewing\",\n    \"address\": \"123 South Coast Hwy\",\n    \"city\": \"Oceanside\",\n    \"state\": \"California\",\n    \"phone\": \"7604420990\",\n    \"website_link\": \"https://oceansidebrewingco.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/breweries/64f90c02-c3f8-4dec-a7c1-ea176b161d88/edit",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"breweries",
+								"64f90c02-c3f8-4dec-a7c1-ea176b161d88",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{drinker}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "Brewer",
+			"item": [
+				{
+					"name": "Delete Beer",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{endpoint}}/beers/999/delete",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"beers",
+								"999",
+								"delete"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit Brewery",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Oceanside Brewing\",\n    \"address\": \"123 South Coast Hwy\",\n    \"city\": \"Oceanside\",\n    \"state\": \"California\",\n    \"phone\": \"7604420990\",\n    \"website_link\": \"https://oceansidebrewingco.com\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{endpoint}}/breweries/64f90c02-c3f8-4dec-a7c1-ea176b161d88/edit",
+							"host": [
+								"{{endpoint}}"
+							],
+							"path": [
+								"breweries",
+								"64f90c02-c3f8-4dec-a7c1-ea176b161d88",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "{{brewer}}",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "brewer",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRGbWltMEpwbUwteEtNSmdtOFRmaSJ9.eyJpc3MiOiJodHRwczovL2Rldi1wZWZuazZob2wwYWJtMmQwLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NzdjMTcyMDg5ZmIwYmZkYjE0NDk0NzMiLCJhdWQiOlsiYnJld2Jsb2ciLCJodHRwczovL2Rldi1wZWZuazZob2wwYWJtMmQwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE3Mzc0MTI3MzQsImV4cCI6MTczNzQ5OTEzNCwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImF6cCI6IkVrNnB5M2lDblBEczBhNVNCYmtNd1hrU21YdUxzT0VwIiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOmJlZXJzIiwiY3JlYXRlOmJyZXdlcmllcyIsImRlbGV0ZTpiZWVycyIsImVkaXQ6YnJld2VyaWVzIiwiZ2V0OmJyZXdlcmllcyJdfQ.G3Mfl1D18XZ6OzWOwMK5eDmj1rKZSXTeBK1wQm_-FeCFiyuk3OL4pfrL6yt8HTU5Y-moQCjU2apVk3odab82LND8_73KAqERJi6kZyip1VkS20wIACwBEhqmvV-kzzMiGALx7otnkLrdpa02EkGE_qgcNkPoI1QqZDjICn6GPJiFgyip74mI8mahV72Jqtux2T0lZyTvCKiQL9NMMo4zQBb3AINx6xh69jq_Vjw3NX4Jk_IsAfRKAw5bywxqLx6FnfvltOAnImxkw-C1caepU5mvclp8Xc_qahGtM4p2z9EBDCsOLKZIAbbXH7XBk5ZZQ5gwI_2wUVMsm597dkFZPw",
+			"type": "string"
+		},
+		{
+			"key": "drinker",
+			"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjRGbWltMEpwbUwteEtNSmdtOFRmaSJ9.eyJpc3MiOiJodHRwczovL2Rldi1wZWZuazZob2wwYWJtMmQwLnVzLmF1dGgwLmNvbS8iLCJzdWIiOiJhdXRoMHw2NzQzYmQ1MmYzZDRiOWQwMzYxYWNjN2IiLCJhdWQiOlsiYnJld2Jsb2ciLCJodHRwczovL2Rldi1wZWZuazZob2wwYWJtMmQwLnVzLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE3Mzc0MTMxMjYsImV4cCI6MTczNzQ5OTUyNiwic2NvcGUiOiJvcGVuaWQgcHJvZmlsZSBlbWFpbCIsImF6cCI6IkVrNnB5M2lDblBEczBhNVNCYmtNd1hrU21YdUxzT0VwIiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOmJlZXJzIiwiY3JlYXRlOmJyZXdlcmllcyIsImdldDpicmV3ZXJpZXMiXX0.IKyZl8q4wRsB9pUG-Yp-4QSV_sjWeniN0OqasMy7JJxXCY8au9-NL7pKGxu3AczootJs_Mu4WihMmFUXNhVWri43EuDeLjWVXnMaI0zWVx4XVSFeXjfks2MrWqHiv5C8zd02YfzKU6apbv92U0263T2mJH0UPc81n2GJrMCCgusjttEm4M_aukpGCZ-cx_AXmUfO55TzHuybTXSG5zYy5kp-BAR6WHC7ECf-P7c_yWYqyO7WQyTdqT2aypqBXQ4_xMMCLYHUYiH12LdPJZfU0u21fOYf3ano-CS4_Rvel2p5AL_kJKOY8rAKLpen5rM4y58awJVG7dhj-SHvJB7lOQ",
+			"type": "string"
+		},
+		{
+			"key": "endpoint",
+			"value": "https://brewblog-api.onrender.com/api",
+			"type": "string"
+		}
+	]
+}
